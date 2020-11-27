@@ -14,12 +14,29 @@ const SquareScreen = () => {
   const [green,setGreen]=useState(0);
   const [blue,setBlue]=useState(0);
   
+  function setColor(color,change){  //color will be equal to 'red' / 'green' / 'blue'
+  
+    switch(color){
+      case 'red':
+        if(red+change>255 || red + change < 0)return;
+        setRed((r)=>r+change);
+        break;
+      case 'green':
+        if(green+change>255 || green + change < 0)return;
+        setGreen((g)=>g+change);
+        break;
+      case 'blue':
+        if(blue+change>255 || blue + change < 0)return;
+        setBlue((b)=>b+change);
+        break;
+    }
+  }
 
   return (
     <View >
-      <ColorCounter color="Red" onInc={()=>setRed((r)=>r+COLOR_INCREMENT)} onDec={()=>setRed((r)=>r-COLOR_INCREMENT)}/>
-      <ColorCounter color="Green" onInc={()=>setGreen((g)=>g+COLOR_INCREMENT)} onDec={()=>setGreen((g)=>g-COLOR_INCREMENT)}/>
-      <ColorCounter color="Blue" onInc={()=>setBlue((b)=>b+COLOR_INCREMENT)} onDec={()=>setBlue((b)=>b-COLOR_INCREMENT)}/>
+      <ColorCounter color="Red" onInc={()=>setColor("red",COLOR_INCREMENT)} onDec={()=>setColor('red',-COLOR_INCREMENT)}/>
+      <ColorCounter color="Green" onInc={()=>setColor("green",COLOR_INCREMENT)} onDec={()=>setColor('green',-COLOR_INCREMENT)}/>
+      <ColorCounter color="Blue" onInc={()=>setColor("blue",COLOR_INCREMENT)} onDec={()=>setColor('blue',-COLOR_INCREMENT)}/>
       <View style={{width:100,height:100,backgroundColor:`rgb(${red},${green},${blue})`}}></View>
     </View>
   );
